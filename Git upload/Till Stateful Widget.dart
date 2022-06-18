@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
 // import 'package:flutter/services.dart'; //to import pakage
 
 void main() {
@@ -24,8 +22,7 @@ class MyAppState extends State<MyApp> {
   //this is persistant
   var count = 0;
 
-  void _press() {
-    //_ means function is used in other files
+  void press() {
     setState(() {
       count = count + 1;
     }); //setState: to rerun the build method set state function is used
@@ -35,21 +32,7 @@ class MyAppState extends State<MyApp> {
   @override //not required means that that we are overriding build method (considered a good practice)
   Widget build(BuildContext context) //class presentin material dart pakage
   {
-    var question = //List of map of string:string and string:List
-        [
-      {
-        'questionText': 'Where do you live?',
-        'answer': ['Ghaziabad', 'Delhi', 'Noida']
-      },
-      {
-        'questionText': 'What\'s your annual income?',
-        'answer': ['7 lac', '8 lac', '10 lac']
-      },
-      {
-        'questionText': "what\'s your relationship status",
-        'answer': ['Single', 'Married', 'Engaged']
-      }
-    ];
+    var question = ["What's favourite colour", "Where do ya live"];
 
     return MaterialApp(
       home: Scaffold(
@@ -57,21 +40,18 @@ class MyAppState extends State<MyApp> {
           title: Text("Shrijit App"),
         ),
         body: Column(children: <Widget>[
-          Question(
-            question[count]['questionText'],
-          ), //runs build method in question file
-
-          ...(question[count]['answer'] as List<String>)
-          .map((answer) {
-            return Answer(_press, answer);
-          }).toList()
-        ],
-        ), // to create list of widgets
+          Text(question.elementAt(count)),
+          ElevatedButton(
+              onPressed: press,
+              child: Text(
+                  "Answer 1")), // () is not used while calling the function because it will return the value of function not the function call
+          ElevatedButton(onPressed: press, child: Text("Answer 2")),
+          ElevatedButton(onPressed: null, child: Text("Answer 3")),
+          ElevatedButton(onPressed: null, child: Text("Answer 4")),
+        ]), // to create list of widgets
       ),
     ); //present in material app,takes named aurgements
     //scaffold gives all the funtionality of basic apps
     //material app is a class which has a parametrized constructor to it
   }
 }
-
-//convention : only widget per file

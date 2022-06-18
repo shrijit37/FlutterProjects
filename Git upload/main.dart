@@ -6,8 +6,11 @@ void main() {
 }
 
 // void main()=>runApp(MyApp());            // arrow function , same as above function only valid in one line
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget{
+    @override
+   MyAppState createState()=> MyAppState();
+}
+class MyAppState extends State<MyApp> {
   //to make stateless widget
   var count =0;
   void press() {
